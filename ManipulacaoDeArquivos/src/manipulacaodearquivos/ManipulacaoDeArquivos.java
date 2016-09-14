@@ -5,9 +5,7 @@
  */
 package manipulacaodearquivos;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -18,6 +16,7 @@ public class ManipulacaoDeArquivos {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
 

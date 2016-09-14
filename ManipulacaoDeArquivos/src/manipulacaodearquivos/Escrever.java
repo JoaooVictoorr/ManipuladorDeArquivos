@@ -8,7 +8,6 @@ package manipulacaodearquivos;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -23,10 +22,9 @@ public class Escrever {
         arquivo.createNewFile();
 
         OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo),"Windows-1252");
-        BufferedWriter escrever = new BufferedWriter(write);
-
-        escrever.write("Insira seu Texto Aqui");
-        escrever.close();
+        try (BufferedWriter escrever = new BufferedWriter(write)) {
+            escrever.write("Insira seu Texto Aqui");
+        }
 
         return arquivo;
     }

@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  *
@@ -17,15 +16,9 @@ import java.util.Scanner;
  */
 public class Ler {
     
-    //        File file = new File("C:\\Users\\joao.piccoli\\Desktop\\Teste");
-//        file.mkdir();
-       
-    
     public File Leitura(File arquivo) throws IOException
     {
-         
-         arquivo.createNewFile();
-          // OPÇÃO COM FILEREADER
+          arquivo.createNewFile();
           FileReader read = new FileReader(arquivo);
           BufferedReader ler = new BufferedReader(read);
           String linha = ler.readLine();
@@ -37,15 +30,4 @@ public class Ler {
         
           return arquivo;
     }
-          
-         //  OPÇÃO COM SCANNER
-          
-//          Scanner scan = new Scanner(arquivo);
-//          
-//          while(scan.hasNext())
-//          {
-//              System.out.println(scan.nextLine());
-//          }
-//          return arquivo;
-//    }
 }

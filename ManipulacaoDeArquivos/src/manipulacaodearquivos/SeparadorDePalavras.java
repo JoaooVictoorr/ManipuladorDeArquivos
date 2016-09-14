@@ -10,13 +10,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -35,7 +32,7 @@ public class SeparadorDePalavras {
         OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(separador),"Windows-1252");
         BufferedWriter escrever = new BufferedWriter(write);
         BufferedReader ler = new BufferedReader(read);
-        ArrayList<String> armazenar = new ArrayList<String>();
+        ArrayList<String> armazenar = new ArrayList<>();
         String linha = ler.readLine();
        
         while (linha != null) {
