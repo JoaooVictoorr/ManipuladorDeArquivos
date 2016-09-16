@@ -21,7 +21,7 @@ public class SeparacaoDeSilabas extends SeparadorDePalavras {
  public void Regras() throws IOException {
        
    
-        VerificarVogal vv = new VerificarVogal();
+        VerificarCaractere vv = new VerificarCaractere();
         SeparadorDePalavras sdp = new SeparadorDePalavras();
         palavrasSeparadas.createNewFile();
         ArrayList<String> palavras = new ArrayList<>();
