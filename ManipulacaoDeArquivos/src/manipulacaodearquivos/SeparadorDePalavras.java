@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class SeparadorDePalavras {
     
-    protected File separador = new File("C:\\Users\\joao.piccoli\\Desktop\\Palavras_Separadas_Por_Linhas.txt");
+    protected File separador = new File("C:\\Users\\joao.macedo\\Desktop\\Palavras_Separadas_Por_Linhas.txt");
     
     public void Separar(File arquivo) throws IOException {
 
