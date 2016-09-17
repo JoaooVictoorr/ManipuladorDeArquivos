@@ -25,7 +25,7 @@ public class SeparadorDePalavras {
     
     public void Separar(File arquivo) throws IOException {
 
-        Character[] separar;
+        String[] separar;
         separador.createNewFile();
         Ler leitura = new Ler();
         InputStreamReader read = new InputStreamReader(new FileInputStream(arquivo),"Windows-1252");
@@ -34,38 +34,26 @@ public class SeparadorDePalavras {
         BufferedReader ler = new BufferedReader(read);
         ArrayList<String> armazenar = new ArrayList<>();
         String linha = ler.readLine();
-        TransferirPalavra tp = new TransferirPalavra();
-        
-     
-
        
         while (linha != null) {
-             if (linha.equals(" ")) {
+             if (linha.equals("")) {
                 linha = ler.readLine();
             } else {
-               tp.TransferirSemCharEspecial(linha);
-               //armazenar.add(linha);
+               armazenar.add(linha);
+               System.out.println(armazenar);
                 linha = ler.readLine();
             }
         }
-         System.out.println(tp.passar);
-        
-         for (int i = 0; i < tp.passar.size(); i++)
-             
-        
-        escrever.append(tp.passar.get(i));
-        
-        
-//        for (int i = 0; i < tp.passar.size(); i++) {
-//            for (int j = 0; i < tp.passar.size(); i++) {
-//                separar = tp.passar.get(i).split("  ");
-//                for (String lista : separar) 
-//                    {
-//                         escrever.write(lista + "\r\n");
-//                    }
-//                }
+        for (int i = 0; i < armazenar.size(); i++) {
+            for (int j = 0; i < armazenar.size(); i++) {
+                separar = armazenar.get(i).split(" ");
+                for (String lista : separar) 
+                    {
+                         escrever.write(lista + "\r\n");
+                    }
+                }
          escrever.close();
-         
+            } 
     }
 }
         
