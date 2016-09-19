@@ -30,21 +30,25 @@ public class ManipulacaoDeArquivos {
         Escrever escrever = new Escrever();
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
+        SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
 
         File arquivo = criar.CriarArquivo("C:\\Users\\joao.piccoli\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
         separacaoDeSilabas.Regras();
+        silabas.Separar(arquivo);
+        
+ 
         
         
         
         
+       
         
         
         
-        
-         String test = "paralelepipedo"; // Tamanho do texto = 112 bits 
+         String test =  ler.Leitura("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
          HuffmanFunctions hf = new HuffmanFunctions();
         // Neste exemplo será considerado que teremos no máximo 256 caracteres diferentes
         // Passo 1 - Percorre o texto contando os símbolos e montando um vetor de frequências.
