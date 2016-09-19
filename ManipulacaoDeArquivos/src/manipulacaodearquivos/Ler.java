@@ -33,6 +33,7 @@ public class Ler {
             System.out.println(linha);
             linha = ler.readLine();
         }
+        
         return retorno.toString();
     }
 }
