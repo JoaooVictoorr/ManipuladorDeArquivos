@@ -19,16 +19,16 @@ import java.util.ArrayList;
  *
  * @author joao.piccoli
  */
-public class SeparadorDePalavras {
+public class SilabasSeparadasPorLinha extends SeparacaoDeSilabas{
     
-    protected File separador = new File("C:\\Users\\joao.piccoli\\Desktop\\Palavras_Separadas_Por_Linhas.txt");
-    
+        protected File separador = new File("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");
+        
     public void Separar(File arquivo) throws IOException {
 
         String[] separar;
         separador.createNewFile();
         Ler leitura = new Ler();
-        InputStreamReader read = new InputStreamReader(new FileInputStream(arquivo),"Windows-1252");
+        InputStreamReader read = new InputStreamReader(new FileInputStream(palavrasSeparadas),"Windows-1252");
         OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(separador),"Windows-1252");
         BufferedWriter escrever = new BufferedWriter(write);
         BufferedReader ler = new BufferedReader(read);
@@ -46,7 +46,7 @@ public class SeparadorDePalavras {
         }
         for (int i = 0; i < armazenar.size(); i++) {
             for (int j = 0; i < armazenar.size(); i++) {
-                separar = armazenar.get(i).split(" ");
+                separar = armazenar.get(i).split("-");
                 for (String lista : separar) 
                     {
                          escrever.write(lista + "\r\n");
@@ -55,6 +55,5 @@ public class SeparadorDePalavras {
          escrever.close();
             } 
     }
+  
 }
-        
-       

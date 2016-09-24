@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author joao.macedo
  */
 public class SeparacaoDeSilabas extends SeparadorDePalavras {
- protected File palavrasSeparadas = new File("C:\\Users\\joao.macedo\\Desktop\\Separação_De_Sílabas.txt");
+ protected File palavrasSeparadas = new File("C:\\Users\\joao.piccoli\\Desktop\\Separação_De_Sílabas.txt");
  public void Regras() throws IOException {
        
    
