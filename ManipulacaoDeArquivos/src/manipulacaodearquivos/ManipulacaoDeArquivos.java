@@ -33,7 +33,7 @@ public class ManipulacaoDeArquivos {
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
 
-        File arquivo = criar.CriarArquivo("C:\\Users\\joao.piccoli\\Desktop\\Teste.txt");
+        File arquivo = criar.CriarArquivo("C:\\Users\\joao.macedo\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
@@ -49,7 +49,7 @@ public class ManipulacaoDeArquivos {
         
         
         
-         ler.Leitura("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         ler.Leitura("C:\\Users\\joao.macedo\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
          test = new String[ler.retorno.size()];
          int i=0;
          for(String sílabas : ler.retorno)
