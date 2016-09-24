@@ -44,8 +44,15 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                
                if(vc.VerificarVogal(tp.transferencia[j]))
                {
-                   if(j == 0 && j == fim)
-                 escrever.append(tp.transferencia[j]);
+                   if(tp.transferencia.length == 1){
+                       escrever.append(tp.transferencia[j]);
+                   }
+                   else if(tp.transferencia.length == 2 && tp.transferencia[j] != 'í')
+                   {
+                       escrever.append(tp.transferencia[j]);
+                   }
+                   else if(j == 0 && j == fim)
+                        escrever.append(tp.transferencia[j]);
                    else if(j == 0)
                   {
                       if(!vc.VerificarVogal(tp.transferencia[j+1])&& tp.transferencia[j+1] != 'n' && tp.transferencia[j+1] != 's' && tp.transferencia[j+1] != 'c' && tp.transferencia[j+1] != 'p' &&  tp.transferencia[j+1] != 'd' &&  tp.transferencia[j+1] != 'g' &&  tp.transferencia[j+1] != 'x' && tp.transferencia[j+1] != 'r' )
@@ -53,7 +60,11 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                        escrever.append(tp.transferencia[j]);
                        escrever.append('-');
                       }
-                      else if(!vc.VerificarVogal(tp.transferencia[j+1]) && vc.VerificarVogal(tp.transferencia[j+2]) && tp.transferencia[j+1] != 't' && tp.transferencia[j+1] != 'm' && tp.transferencia[j+1] != 'n')
+                      else if(j == 0 && j+1 == fim)
+                      {
+                          escrever.append(tp.transferencia[j]);
+                      }
+                      else if( !vc.VerificarVogal(tp.transferencia[j+1]) && vc.VerificarVogal(tp.transferencia[j+2]) && tp.transferencia[j+1] != 't' && tp.transferencia[j+1] != 'm' && tp.transferencia[j+1] != 'n')
                       {
                           escrever.append(tp.transferencia[j]);
                           escrever.append('-');       
@@ -158,9 +169,17 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                           {
                               escrever.append(tp.transferencia[j]);
                           }
-                          else if(tp.transferencia[j+1] == 'r' && tp.transferencia[j-1] != 's' && tp.transferencia[j-1] != 'v'  )
+                          else if(tp.transferencia[j+1] == 'r' && tp.transferencia[j-1] != 's' && tp.transferencia[j-1] != 'v')
                           {
-                              escrever.append(tp.transferencia[j]);
+                              if(tp.transferencia[j-1] == 'f' && tp.transferencia[j] == 'e')
+                              {
+                                  escrever.append(tp.transferencia[j]);
+                                  escrever.append('-');
+                              }
+                              else
+                              {
+                                  escrever.append(tp.transferencia[j]);
+                              }
                           }
                            else if(tp.transferencia[j+1] == 'r' && tp.transferencia[j-1] == 's')
                           {
@@ -390,7 +409,7 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                     {
                       escrever.append(tp.transferencia[j]);
                     }
-                    else if(j + 1<= fim && tp.transferencia[j+1] == 'á' || tp.transferencia[j+1] == 'ó' || tp.transferencia[j+1] == 'é' )
+                    else if(j + 1<= fim && tp.transferencia[j+1] == 'á' || tp.transferencia[j+1] == 'ó' || tp.transferencia[j+1] == 'é' || tp.transferencia[j+1] == 'ê' )
                     {
                         escrever.append(tp.transferencia[j]);
                     }
@@ -570,6 +589,10 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                            escrever.append(tp.transferencia[j]);
                        }
                        }
+                       else if(j==0 && tp.transferencia[j] == 'l')
+                       {
+                           escrever.append(tp.transferencia[j]);
+                       }
                        else if( j + 1 <= fim && vc.VerificarVogal(tp.transferencia[j-1]) && !vc.VerificarVogal(tp.transferencia[j-2]) && vc.VerificarVogal(tp.transferencia[j+1]))
                        {
                          escrever.append('-');
@@ -587,11 +610,16 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                            {
                              escrever.append('-');
                              escrever.append(tp.transferencia[j]); 
+                           } 
+                           
+                           else if(tp.transferencia[j] == 't' && j==fim)
+                           {
+                                escrever.append(tp.transferencia[j]);
                            }
                            else if(vc.VerificarVogal(tp.transferencia[j-1]) && !vc.VerificarVogal(tp.transferencia[j+1]) && tp.transferencia[j+1] != 'r')
-                           {
-                             escrever.append(tp.transferencia[j]);
-                             escrever.append('-');   
+                           {                        
+                                   escrever.append(tp.transferencia[j]);
+                                   escrever.append('-');   
                            }
                            else if( j == 0 && tp.transferencia[j+1] == 'b' || tp.transferencia[j+1] == 'c' || tp.transferencia[j+1] == 'p' ||  tp.transferencia[j+1] == 'd' ||  tp.transferencia[j+1] == 't' ||  tp.transferencia[j+1] == 'g' || tp.transferencia[j+1] == 'n' ) 
                          {
@@ -657,11 +685,11 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                         escrever.append(tp.transferencia[j]);
                         escrever.append('-');
                     }
-                    else if((j != 0) && ((!vc.VerificarVogal(tp.transferencia[j])) && (tp.transferencia[j] != 'r') && (vc.VerificarVogal(tp.transferencia[j-1])) && (vc.VerificarVogal(tp.transferencia[j-2]))))
+                    else if((j != 0 && j > 1) && ((!vc.VerificarVogal(tp.transferencia[j])) && (tp.transferencia[j] != 'r') && (vc.VerificarVogal(tp.transferencia[j-1])) && (vc.VerificarVogal(tp.transferencia[j-2]))))
                      {
                           escrever.append('-');
                           escrever.append(tp.transferencia[j]);
-                    }
+                     }
                     else if(tp.transferencia[j] == 'q')
                     {
                         if(tp.transferencia[j+1] == 'u' && tp.transferencia[j+2] == 'é')
