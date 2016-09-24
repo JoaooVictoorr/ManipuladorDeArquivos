@@ -27,6 +27,7 @@ public class ManipulacaoDeArquivos {
 
         Criar criar = new Criar();
         Ler ler = new Ler();
+        String[] test;
         Escrever escrever = new Escrever();
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
@@ -37,6 +38,7 @@ public class ManipulacaoDeArquivos {
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
         separacaoDeSilabas.Regras();
+        silabas.Separar(arquivo);
         
  
         
@@ -47,31 +49,39 @@ public class ManipulacaoDeArquivos {
         
         
         
-         String test = ler.Leitura("C:\\Users\\joao.piccoli\\Desktop\\Separação_De_Sílabas.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         ler.Leitura("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         test = new String[ler.retorno.size()];
+         int i=0;
+         for(String sílabas : ler.retorno)
+         {
+             test[i] = ler.retorno.get(i);
+             i++;
+         }
          HuffmanFunctions hf = new HuffmanFunctions();
+         hf.MedirFrequencia(test);
         // Neste exemplo será considerado que teremos no máximo 256 caracteres diferentes
         // Passo 1 - Percorre o texto contando os símbolos e montando um vetor de frequências.
-        int[] charFreqs = new int[256];
-        for (char c : test.toCharArray())
-            charFreqs[c]++;
-        
-        // Criar a Árvore dos códigos para a Compactação
-        HuffmanTree tree = buildTree(charFreqs);
-        
-        // Resultados das quantidade e o código da Compactação
-        System.out.println("TABELA DE CÓDIGOS");
-        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
-        printCodes(tree, new StringBuffer());
-        
-        // Compactar o texto
-        String encode = hf.encode(tree,test);
-        // Mostrar o texto Compactado
-        System.out.println("\nTEXTO COMPACTADO");
-        System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
-        
-        // Decodificar o texto
-        System.out.println("\n\nTEXTO DECODIFICADO");
-        System.out.println(decode(tree,encode));
+//        int[] charFreqs = new int[256];
+//        for (String c : test.toString())
+//            charFreqs[c]++;
+//        
+//        // Criar a Árvore dos códigos para a Compactação
+//        HuffmanTree tree = buildTree(charFreqs);
+//        
+//        // Resultados das quantidade e o código da Compactação
+//        System.out.println("TABELA DE CÓDIGOS");
+//        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
+//        printCodes(tree, new StringBuffer());
+//        
+//        // Compactar o texto
+//        String encode = hf.encode(tree,test);
+//        // Mostrar o texto Compactado
+//        System.out.println("\nTEXTO COMPACTADO");
+//        System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
+//        
+//        // Decodificar o texto
+//        System.out.println("\n\nTEXTO DECODIFICADO");
+//        System.out.println(decode(tree,encode));
     }
 
    

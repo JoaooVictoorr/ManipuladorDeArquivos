@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class Ler {
     
+    public List<String> retorno = new ArrayList<>();
+    
     public String Leitura(String caminho) throws IOException
     { 
-        List<String> retorno = new ArrayList<>();
-
           InputStreamReader reader = new InputStreamReader(new FileInputStream(caminho),"Windows-1252");
           BufferedReader ler = new BufferedReader(reader);
           String linha = ler.readLine();
@@ -36,4 +36,5 @@ public class Ler {
         
         return retorno.toString();
     }
+
 }

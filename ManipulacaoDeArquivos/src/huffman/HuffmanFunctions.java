@@ -5,7 +5,10 @@
  */
 package huffman;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
+import manipulacaodearquivos.SilabaFreq;
 
 /**
  *
@@ -144,7 +147,37 @@ public class HuffmanFunctions {
 		return null;
     }
     
-    
+    public String MedirFrequencia(String[] silaba)
+    {
+       String[] comparar = new String[silaba.length];
+       List <SilabaFreq> sfl = new ArrayList<>();
+       int j = 0;
+       int i = 0;
+       for(String verificar : silaba)
+       for(String testar : comparar)
+       {
+           if(testar == null)
+           {
+              SilabaFreq sf = new SilabaFreq();
+              sf.silaba = verificar;
+              sf.frequencia ++;
+              sfl.add(sf);
+              i++;
+              comparar[j] = verificar;
+              j++;
+              break;
+           }
  
+       
+       return null;
+      
+          
+       
+    }
+          return null;
     
+   
+    
+     
+}
 }
