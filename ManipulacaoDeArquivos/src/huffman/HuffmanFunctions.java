@@ -6,9 +6,11 @@
 package huffman;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import manipulacaodearquivos.SilabaFreq;
+import manipulacaodearquivos.TransferirPalavra;
 
 /**
  *
@@ -16,15 +18,17 @@ import manipulacaodearquivos.SilabaFreq;
  */
 public class HuffmanFunctions {
     
-      public static HuffmanTree buildTree(int[] charFreqs) {
+    public SilabaFreq[] sf;
+    
+      public static HuffmanTree buildTree(SilabaFreq[] charFreqs) {
     	// Cria uma Fila de Prioridade 
     	// A Fila será criado pela ordem de frequência da letra no texto
         PriorityQueue<HuffmanTree> trees = new PriorityQueue<HuffmanTree>();
         // Criar as Folhas da Árvore para cada letra 
         for (int i = 0; i < charFreqs.length; i++){
-            if (charFreqs[i] > 0){
-                trees.offer(new HuffmanLeaf(charFreqs[i], (char)i)); // Inser os elementos, nó folha, na fila de prioridade
-            }
+            
+                trees.offer(new HuffmanLeaf(charFreqs[i].frequencia, charFreqs[i].silaba)); // Inser os elementos, nó folha, na fila de prioridade
+            
         }
         
         // Percorre todos os elementos da fila
@@ -41,13 +45,14 @@ public class HuffmanFunctions {
         return trees.poll();
     }
       
-        public static String encode(HuffmanTree tree, String encode){
+        public String encode(HuffmanTree tree, String encode){
     	assert tree != null;
     	
     	String encodeText = "";
-        for (char c : encode.toCharArray()){
+        String c = null;
+        //for (String c : encode){
         	encodeText+=(getCodes(tree, new StringBuffer(),c));
-        }
+        //}
     	return encodeText; // Retorna o texto Compactado
     }
     
@@ -118,7 +123,7 @@ public class HuffmanFunctions {
      *     						  w - Letra
      *     Parâmetros de Saída: prefix- Letra codificada
      */
-    public static String getCodes(HuffmanTree tree, StringBuffer prefix, char w) {
+    public static String getCodes(HuffmanTree tree, StringBuffer prefix, String w) {
         assert tree != null;
         
         if (tree instanceof HuffmanLeaf) {
@@ -149,32 +154,52 @@ public class HuffmanFunctions {
     
     public String MedirFrequencia(String[] silaba)
     {
+       TransferirPalavra tp = new TransferirPalavra();
        String[] comparar = new String[silaba.length];
-       List <SilabaFreq> sfl = new ArrayList<>();
+       sf = new SilabaFreq[silaba.length];
        int j = 0;
        int i = 0;
        for(String verificar : silaba)
        for(String testar : comparar)
        {
-           if(testar == null)
+           if(testar == null && tp.Contem(verificar, sf))
            {
-              SilabaFreq sf = new SilabaFreq();
-              sf.silaba = verificar;
-              sf.frequencia ++;
-              sfl.add(sf);
-              i++;
-              comparar[j] = verificar;
-              j++;
-              break;
+               sf[i] = new SilabaFreq();
+               sf[i].silaba = verificar;
+               sf[i].frequencia ++; 
+               comparar[j] = verificar;
+               i++;
+               j++;
+               break;
            }
- 
-       
-       return null;
+           else if(verificar.equals(testar))
+           {
+             for(int k = 0; k <= sf.length; k++)
+             {
+                 if(verificar.equals(sf[k].silaba))
+                 {
+                     sf[k].frequencia++;
+                     break;
+                 }
+                     
+             }
+           }
       
-          
+       }
        
-    }
-          return null;
+       List<SilabaFreq> lista = new ArrayList<>();
+       
+       for(SilabaFreq passar : sf)
+           lista.add(passar);
+       lista.remove(null);
+       int u = 0;
+       sf = new SilabaFreq[lista.size()];
+       for(SilabaFreq passar : lista)
+       {
+           sf[u] = passar;
+         u++;
+       }
+          return sf.toString();
     
    
     

@@ -46,6 +46,19 @@ public class TransferirPalavra {
                     
                 }
            }
+    
+    public boolean Contem(String contem, SilabaFreq[] contemAqui)
+    {
+        for(int i = 0;i<=contemAqui.length;i++)
+            if(contemAqui[i] != null)
+            {
+               if(contem.equals(contemAqui[i].silaba))
+                   return false;
+            }
+            else 
+               return true;
+        return false;
+    }
         
         
         

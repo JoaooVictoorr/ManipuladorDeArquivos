@@ -33,7 +33,7 @@ public class ManipulacaoDeArquivos {
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
 
-        File arquivo = criar.CriarArquivo("C:\\Users\\joao.macedo\\Desktop\\Teste.txt");
+        File arquivo = criar.CriarArquivo("C:\\Users\\João Victor\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
@@ -49,7 +49,7 @@ public class ManipulacaoDeArquivos {
         
         
         
-         ler.Leitura("C:\\Users\\joao.macedo\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         ler.Leitura("C:\\Users\\João Victor\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
          test = new String[ler.retorno.size()];
          int i=0;
          for(String sílabas : ler.retorno)
@@ -59,19 +59,21 @@ public class ManipulacaoDeArquivos {
          }
          HuffmanFunctions hf = new HuffmanFunctions();
          hf.MedirFrequencia(test);
+         
+         
         // Neste exemplo será considerado que teremos no máximo 256 caracteres diferentes
         // Passo 1 - Percorre o texto contando os símbolos e montando um vetor de frequências.
 //        int[] charFreqs = new int[256];
 //        for (String c : test.toString())
 //            charFreqs[c]++;
 //        
-//        // Criar a Árvore dos códigos para a Compactação
-//        HuffmanTree tree = buildTree(charFreqs);
-//        
-//        // Resultados das quantidade e o código da Compactação
-//        System.out.println("TABELA DE CÓDIGOS");
-//        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
-//        printCodes(tree, new StringBuffer());
+        // Criar a Árvore dos códigos para a Compactação
+        HuffmanTree tree = buildTree(hf.sf);
+        
+        // Resultados das quantidade e o código da Compactação
+        System.out.println("TABELA DE CÓDIGOS");
+        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
+        printCodes(tree, new StringBuffer());
 //        
 //        // Compactar o texto
 //        String encode = hf.encode(tree,test);
