@@ -45,14 +45,13 @@ public class HuffmanFunctions {
         return trees.poll();
     }
       
-        public String encode(HuffmanTree tree, String encode){
+        public String encode(HuffmanTree tree, String[] encode){
     	assert tree != null;
     	
     	String encodeText = "";
-        String c = null;
-        //for (String c : encode){
+        for (String c : encode){
         	encodeText+=(getCodes(tree, new StringBuffer(),c));
-        //}
+        }
     	return encodeText; // Retorna o texto Compactado
     }
     
@@ -180,17 +179,15 @@ public class HuffmanFunctions {
                  {
                      sf[k].frequencia++;
                      break;
-                 }
-                     
+                 }         
              }
            }
-      
        }
-       
        List<SilabaFreq> lista = new ArrayList<>();
        
        for(SilabaFreq passar : sf)
            lista.add(passar);
+       for(int l = 0; l<=lista.size(); l++)
        lista.remove(null);
        int u = 0;
        sf = new SilabaFreq[lista.size()];
@@ -200,9 +197,5 @@ public class HuffmanFunctions {
          u++;
        }
           return sf.toString();
-    
-   
-    
-     
 }
 }

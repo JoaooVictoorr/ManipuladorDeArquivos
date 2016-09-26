@@ -33,7 +33,7 @@ public class ManipulacaoDeArquivos {
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
 
-        File arquivo = criar.CriarArquivo("C:\\Users\\João Victor\\Desktop\\Teste.txt");
+        File arquivo = criar.CriarArquivo("C:\\Users\\joao.piccoli\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
@@ -49,7 +49,7 @@ public class ManipulacaoDeArquivos {
         
         
         
-         ler.Leitura("C:\\Users\\João Victor\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         ler.Leitura("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
          test = new String[ler.retorno.size()];
          int i=0;
          for(String sílabas : ler.retorno)
@@ -75,11 +75,11 @@ public class ManipulacaoDeArquivos {
         System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
         printCodes(tree, new StringBuffer());
 //        
-//        // Compactar o texto
-//        String encode = hf.encode(tree,test);
-//        // Mostrar o texto Compactado
-//        System.out.println("\nTEXTO COMPACTADO");
-//        System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
+        // Compactar o texto
+        String encode = hf.encode(tree,test);
+        // Mostrar o texto Compactado
+        System.out.println("\nTEXTO COMPACTADO");
+        System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
 //        
 //        // Decodificar o texto
 //        System.out.println("\n\nTEXTO DECODIFICADO");
