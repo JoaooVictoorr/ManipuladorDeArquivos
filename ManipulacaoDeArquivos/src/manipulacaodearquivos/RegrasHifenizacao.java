@@ -55,7 +55,7 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                         escrever.append(tp.transferencia[j]);
                    else if(j == 0)
                   {
-                      if(!vc.VerificarVogal(tp.transferencia[j+1])&& tp.transferencia[j+1] != 'n' && tp.transferencia[j+1] != 's' && tp.transferencia[j+1] != 'c' && tp.transferencia[j+1] != 'p' &&  tp.transferencia[j+1] != 'd' &&  tp.transferencia[j+1] != 'g' &&  tp.transferencia[j+1] != 'x' && tp.transferencia[j+1] != 'r' )
+                      if(!vc.VerificarVogal(tp.transferencia[j+1])&& tp.transferencia[j+1] != 'n' && tp.transferencia[j+1] != 's' && tp.transferencia[j+1] != 'c' && tp.transferencia[j+1] != 'p' &&  tp.transferencia[j+1] != 'd' &&  tp.transferencia[j+1] != 'g' &&  tp.transferencia[j+1] != 'x' && tp.transferencia[j+1] != 'r' && tp.transferencia[j+1] != 'm' )
                       {
                        escrever.append(tp.transferencia[j]);
                        escrever.append('-');
@@ -608,8 +608,8 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                        {
                            if(tp.transferencia[j] == 'c' && vc.VerificarVogal(tp.transferencia[j-1]) && !vc.VerificarVogal(tp.transferencia[j+1]))
                            {
-                             escrever.append('-');
                              escrever.append(tp.transferencia[j]); 
+                             escrever.append('-');
                            } 
                            
                            else if(tp.transferencia[j] == 't' && j==fim)
