@@ -81,9 +81,9 @@ public class ManipulacaoDeArquivos {
         System.out.println("\nTEXTO COMPACTADO");
         System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
 //        
-//        // Decodificar o texto
-//        System.out.println("\n\nTEXTO DECODIFICADO");
-//        System.out.println(decode(tree,encode));
+        // Decodificar o texto
+        System.out.println("\n\nTEXTO DECODIFICADO");
+        System.out.println(decode(tree,encode));
     }
 
    

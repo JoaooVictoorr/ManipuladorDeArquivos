@@ -129,7 +129,7 @@ public class HuffmanFunctions {
             HuffmanLeaf leaf = (HuffmanLeaf)tree;
             
             // Retorna o texto compactado da letra
-            if (leaf.value == w ){
+            if (leaf.value.equals(w)){
             	return prefix.toString();
             }
             
