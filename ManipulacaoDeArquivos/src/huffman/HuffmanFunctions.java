@@ -184,11 +184,25 @@ public class HuffmanFunctions {
            }
        }
        List<SilabaFreq> lista = new ArrayList<>();
-       
+       int tirar = 0;
        for(SilabaFreq passar : sf)
            lista.add(passar);
        for(int l = 0; l<=lista.size(); l++)
-       lista.remove(null);
+       { 
+        if(lista.get(l) == null)
+           {
+                tirar = l;
+           while(lista.contains(null))
+           {
+               if(lista.size() > tirar)
+                 lista.remove(tirar);
+               else if(lista.size() == tirar)
+                   break;
+           }
+           }      
+       }
+       
+       
        int u = 0;
        sf = new SilabaFreq[lista.size()];
        for(SilabaFreq passar : lista)

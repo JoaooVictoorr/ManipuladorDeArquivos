@@ -36,13 +36,13 @@ public class SilabasSeparadasPorLinha extends SeparacaoDeSilabas{
         String linha = ler.readLine();
        
         while (linha != null) {
-             if (linha.equals("")) {
-                linha = ler.readLine();
-            } else {
+//             if (linha.equals("")) {
+//                linha = ler.readLine();
+//            } else {
                armazenar.add(linha);
                System.out.println(armazenar);
                 linha = ler.readLine();
-            }
+//            }
         }
         for (int i = 0; i < armazenar.size(); i++) {
             for (int j = 0; i < armazenar.size(); i++) {
