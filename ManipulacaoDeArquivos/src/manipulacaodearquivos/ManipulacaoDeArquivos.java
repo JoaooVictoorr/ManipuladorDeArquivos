@@ -32,6 +32,7 @@ public class ManipulacaoDeArquivos {
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
+        Conversao c = new Conversao();
 
         File arquivo = criar.CriarArquivo("C:\\Users\\joao.piccoli\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
@@ -80,6 +81,9 @@ public class ManipulacaoDeArquivos {
         // Mostrar o texto Compactado
         System.out.println("\nTEXTO COMPACTADO");
         System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
+        
+        c.ConverterBinDec(encode.toCharArray());
+        
 //        
         // Decodificar o texto
         System.out.println("\n\nTEXTO DECODIFICADO");

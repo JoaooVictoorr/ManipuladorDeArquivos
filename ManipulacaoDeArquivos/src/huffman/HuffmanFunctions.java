@@ -187,7 +187,7 @@ public class HuffmanFunctions {
        int tirar = 0;
        for(SilabaFreq passar : sf)
            lista.add(passar);
-       for(int l = 0; l<=lista.size(); l++)
+       for(int l = 0; l<lista.size(); l++)
        { 
         if(lista.get(l) == null)
            {
