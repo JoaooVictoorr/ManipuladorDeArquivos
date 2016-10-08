@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class SilabasSeparadasPorLinha extends SeparacaoDeSilabas{
     
-        protected File separador = new File("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");
+        protected File separador = new File("C:\\Users\\João Victor\\Desktop\\Sílabas_Separadas_Por_Linha.txt");
         
     public void Separar(File arquivo) throws IOException {
 

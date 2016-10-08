@@ -17,13 +17,26 @@ import java.io.OutputStreamWriter;
  */
 public class Escrever {
 
-    public File Escrever(File arquivo) throws IOException {
+    public File EscreverChar(char[] conteudo, String caminho) throws IOException {
+       Criar c = new Criar();
+       File arquivo = c.CriarArquivo(caminho);
 
-        arquivo.createNewFile();
+        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo),"UTF-8");
+        try (BufferedWriter escrever = new BufferedWriter(write)) {
+            for(char i: conteudo)
+             escrever.write(i);
+        }
+
+        return arquivo;
+    }
+    
+    public File EscreverString(String conteudo, String caminho) throws IOException {
+       Criar c = new Criar();
+       File arquivo = c.CriarArquivo(caminho);
 
         OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo),"Windows-1252");
         try (BufferedWriter escrever = new BufferedWriter(write)) {
-            escrever.write("Insira seu Texto Aqui");
+             escrever.write(conteudo);
         }
 
         return arquivo;

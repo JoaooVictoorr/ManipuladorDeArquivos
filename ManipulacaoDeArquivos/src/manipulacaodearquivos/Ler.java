@@ -26,7 +26,7 @@ public class Ler {
     
     public String Leitura(String caminho) throws IOException
     { 
-          InputStreamReader reader = new InputStreamReader(new FileInputStream(caminho),"Windows-1252");
+          InputStreamReader reader = new InputStreamReader(new FileInputStream(caminho),"UTF-8");
           BufferedReader ler = new BufferedReader(reader);
           String linha = ler.readLine();
           

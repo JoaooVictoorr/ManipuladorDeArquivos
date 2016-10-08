@@ -6,6 +6,7 @@
 package manipulacaodearquivos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Conversao 
 {
-    public String ConverterBinDec(char[] binario)
+    public ArrayList<Integer> ConverterBinDec(char[] binario)
     {
         int limite = binario.length/8;
         int contador = 0;
@@ -42,15 +43,19 @@ public class Conversao
             else
             {
                 dados+=binario[i];
-                if(i == binario.length-1)
+                if(i <binario.length)
                 {
                   valor = TransformarEmDecimal(dados);
                   formaDecimal.add(valor);   
                 }      
             }
+        } 
+        if(limite == 8)
+        {
+          valor = TransformarEmDecimal(dados);
+          formaDecimal.add(valor);
         }
-        TransformarEmBinario(formaDecimal);
-        return formaDecimal.toString();
+        return formaDecimal;
     }
     
     
@@ -74,6 +79,42 @@ public class Conversao
          conversao+= Integer.toBinaryString(i);
        }
        return conversao;
+    }
+    
+    public char[] TransformarEmSimbolo(ArrayList<Integer> valor)
+    {
+        char[] simbolos = new char[valor.size()];
+        int j = 0;
+       for(int i:valor)
+       {
+          simbolos[j] = (char)i;
+          j++;
+       }   
+       
+       return simbolos;
+    }
+    
+    public String TransformarSimbEmBin(List<String> valor)
+    {
+        int i = 0;
+        int k = 0;
+        String bin ="";
+        String descompactadoInt;
+        char[] aux;
+        int[] novoValor;
+        
+        for(String j : valor)
+        {
+          descompactadoInt = j;
+          aux = descompactadoInt.toCharArray();
+          novoValor = new int[aux.length];
+          for(k = 0; k < aux.length; k++)
+          {
+              novoValor[k] = (int)aux[k];
+              bin += Integer.toBinaryString(novoValor[k]);
+          }  
+        } 
+        return bin;
     }
     
     

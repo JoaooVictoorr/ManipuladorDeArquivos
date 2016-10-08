@@ -12,10 +12,11 @@ import static huffman.HuffmanFunctions.printCodes;
 import huffman.HuffmanTree;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
- * @author joao.piccoli
+ * @author João Victor
  */
 public class ManipulacaoDeArquivos {
 
@@ -34,7 +35,7 @@ public class ManipulacaoDeArquivos {
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
         Conversao c = new Conversao();
 
-        File arquivo = criar.CriarArquivo("C:\\Users\\joao.piccoli\\Desktop\\Teste.txt");
+        File arquivo = criar.CriarArquivo("C:\\Users\\João Victor\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
@@ -50,7 +51,7 @@ public class ManipulacaoDeArquivos {
         
         
         
-         ler.Leitura("C:\\Users\\joao.piccoli\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         ler.Leitura("C:\\Users\\João Victor\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
          test = new String[ler.retorno.size()];
          int i=0;
          for(String sílabas : ler.retorno)
@@ -82,12 +83,23 @@ public class ManipulacaoDeArquivos {
         System.out.println("\nTEXTO COMPACTADO");
         System.out.println(encode); // Tamanho de 40 bits - Economia de 72 bits
         
-        c.ConverterBinDec(encode.toCharArray());
+       
+        ArrayList<Integer> decimal = c.ConverterBinDec(encode.toCharArray());
+        
+        escrever.EscreverChar(c.TransformarEmSimbolo(decimal), "C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
+        Ler descompactar = new Ler();
+        descompactar.Leitura("C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
+       
+        encode = c.TransformarSimbEmBin(descompactar.retorno);
         
 //        
         // Decodificar o texto
         System.out.println("\n\nTEXTO DECODIFICADO");
         System.out.println(decode(tree,encode));
+        String descompactado = decode(tree,encode);
+        escrever.EscreverString(descompactado,"C:\\Users\\João Victor\\Desktop\\TextoDescompactado.txt");
+        
+        
     }
 
    
