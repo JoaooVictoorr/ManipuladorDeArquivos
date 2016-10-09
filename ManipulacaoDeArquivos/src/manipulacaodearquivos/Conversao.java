@@ -27,15 +27,16 @@ public class Conversao
         
         for(i = 0; i < binario.length; i++)
         { 
-            if(contador != limite)
+            if(contador <= limite)
             {
-                if(i != parada)   
+                if(i <= parada)   
                  dados += binario[i];
                 else
                 { 
                   valor = TransformarEmDecimal(dados);
                   formaDecimal.add(valor);
                   dados = "";
+                  dados += binario[i];
                   contador++;
                   parada = i + 8; 
                 } 
@@ -50,11 +51,12 @@ public class Conversao
                 }      
             }
         } 
-        if(limite == 8)
-        {
+        
+//        if(limite == 8)
+//        {
           valor = TransformarEmDecimal(dados);
           formaDecimal.add(valor);
-        }
+        //}
         return formaDecimal;
     }
     
@@ -115,13 +117,25 @@ public class Conversao
           }  
         } 
         return bin;
-    }
+    }  
     
-    
-    
-    
-    
-    
-    
-    
+//    public String TransformarDecEmBinario(int valor)
+//    {
+//        String resultado = "";
+//        int resto;
+//        
+//        while(valor > 0)
+//        {
+//          resto = (valor % 2);
+//          resultado += resto;
+//          valor = (valor / 2);
+//        }
+//       
+//        
+//        
+//        
+//        return resultado;
+//        
+//        
+//    }
 }
