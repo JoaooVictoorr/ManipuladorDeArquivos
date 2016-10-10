@@ -59,6 +59,7 @@ public class ManipulacaoDeArquivos {
              test[i] = ler.retorno.get(i);
              i++;
          }
+        
          HuffmanFunctions hf = new HuffmanFunctions();
          hf.MedirFrequencia(test);
          
@@ -98,8 +99,6 @@ public class ManipulacaoDeArquivos {
         System.out.println(decode(tree,encode));
         String descompactado = decode(tree,encode);
         escrever.EscreverString(descompactado,"C:\\Users\\João Victor\\Desktop\\TextoDescompactado.txt");
-        
-        
     }
 
    

@@ -14,9 +14,11 @@ import java.util.List;
  */
 public class Conversao 
 {
+    public char[]guardar;
     public ArrayList<Integer> ConverterBinDec(char[] binario)
     {
         int limite = binario.length/8;
+        guardar = binario;
         int contador = 0;
         int i = 0;
         int parada = i + 8;
@@ -98,44 +100,55 @@ public class Conversao
     
     public String TransformarSimbEmBin(List<String> valor)
     {
-        int i = 0;
-        int k = 0;
-        String bin ="";
-        String descompactadoInt;
-        char[] aux;
-        int[] novoValor;
+//        int i = 0;
+//        int k = 0;
+//        String bin ="";
+//        String descompactadoInt;
+//        char[] aux;
+//        int[] novoValor;
+//        char[] verificador;
+//        ArrayList<Character> comparar = new ArrayList<>();
+//        
+//        for(String j : valor)
+//        {
+//          descompactadoInt = j;
+//          aux = descompactadoInt.toCharArray();
+//          novoValor = new int[aux.length];
+//          for(k = 0; k < aux.length; k++)
+//          {
+//              novoValor[k] = (int)aux[k];
+//              bin += TransformarDecEmBinario(novoValor[k]);
+//          }  
+//        } 
+//        
+//        return bin;
         
-        for(String j : valor)
-        {
-          descompactadoInt = j;
-          aux = descompactadoInt.toCharArray();
-          novoValor = new int[aux.length];
-          for(k = 0; k < aux.length; k++)
-          {
-              novoValor[k] = (int)aux[k];
-              bin += Integer.toBinaryString(novoValor[k]);
-          }  
-        } 
-        return bin;
+        //SOLUÇÃO PROVISÓRIA
+        String retornar = "";
+        for(char i : guardar)
+         retornar += i;   
+        
+        return retornar; 
+        //SOLUÇÃO PROVISÓRIA
     }  
     
-//    public String TransformarDecEmBinario(int valor)
-//    {
-//        String resultado = "";
-//        int resto;
-//        
-//        while(valor > 0)
-//        {
-//          resto = (valor % 2);
-//          resultado += resto;
-//          valor = (valor / 2);
-//        }
-//       
-//        
-//        
-//        
-//        return resultado;
-//        
-//        
-//    }
+    public String TransformarDecEmBinario(int valor)
+    {
+        String resultado = "";
+        ArrayList<Integer> valores = new ArrayList<>();
+        int resto;
+        int i = 0;
+        
+        while(valor > 0)
+        {
+          resto = (valor % 2);
+          valores.add(resto);
+          valor = (valor / 2);
+        }
+       
+        for(int j = valores.size()-1; j >= 0; j--)
+            resultado += valores.get(j);
+       
+        return resultado;
+    }
 }

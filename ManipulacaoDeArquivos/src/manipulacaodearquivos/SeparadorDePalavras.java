@@ -41,7 +41,7 @@ public class SeparadorDePalavras {
 //            } else {
                armazenar.add(linha);
                System.out.println(armazenar);
-                linha = ler.readLine();
+               linha = ler.readLine();
             //}
         }
         for (int i = 0; i < armazenar.size(); i++) {
