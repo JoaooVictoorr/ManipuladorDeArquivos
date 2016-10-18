@@ -5,6 +5,7 @@
  */
 package manipulacaodearquivos;
 
+import Interface.TelaPrincipal;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,9 +20,8 @@ import java.util.ArrayList;
  *
  * @author joao.piccoli
  */
-public class SeparadorDePalavras {
-    
-    protected File separador = new File("C:\\Users\\João Victor\\Desktop\\Palavras_Separadas_Por_Linhas.txt");
+public class SeparadorDePalavras extends TelaPrincipal {
+    protected File separador = new File(caminhoDescompressao + "Palavras_Separadas_Por_Linhas.txt");
     
     public void Separar(File arquivo) throws IOException {
 

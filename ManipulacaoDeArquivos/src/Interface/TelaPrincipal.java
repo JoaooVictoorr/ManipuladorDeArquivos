@@ -7,11 +7,14 @@ package Interface;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.ImageCursor;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -80,18 +83,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(btnComprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 179, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSelecionarArquivo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelCaminho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnComprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(183, 183, 183))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +112,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        public File caminhoDescompressao;
     private void btnSelecionarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarArquivoActionPerformed
        
         JFileChooser chooser = new JFileChooser();
@@ -123,7 +126,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         try
         {
-            FileReader reader = new FileReader(caminho);
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(caminho),"Windows-1252");
             BufferedReader buffReader = new BufferedReader(reader);
             areaLeitura.read(buffReader, null);
             buffReader.close();
@@ -135,14 +138,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSelecionarArquivoActionPerformed
 
     private void btnComprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprimirActionPerformed
-         
+
         //Escrever escrever = new Escrever();
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
         Criar criar = new Criar();
 
-        File arquivo = criar.CriarArquivo(labelCaminho.getText());
+        File arquivo = new File(labelCaminho.getText());
+        
+            if(labelCaminho.getText().equals(""))
+            {
+              JOptionPane.showMessageDialog(null, "Nenhum arquivo foi selecionado!");
+              btnSelecionarArquivo.requestFocusInWindow();
+            }
+          else
+          { 
+               JFileChooser chooserComprimir = new JFileChooser();
+               chooserComprimir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+               chooserComprimir.showSaveDialog(this);
+               caminhoDescompressao = chooserComprimir.getCurrentDirectory();
+          }
         try {
             //escrever.Escrever(arquivo);
             //ler.Leitura(arquivo);
