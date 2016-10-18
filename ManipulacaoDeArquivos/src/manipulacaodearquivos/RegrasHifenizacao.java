@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manipulacaodearquivos;
 
 import java.io.BufferedWriter;
@@ -559,6 +554,11 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                    {
                        escrever.append(tp.transferencia[j]);
                        escrever.append('-');
+                   }
+                   else if(tp.transferencia[j-1] == 'a' && tp.transferencia[j+1] == 'o') 
+                   {
+                       escrever.append('-');
+                       escrever.append(tp.transferencia[j]);
                    }
                    else 
                    {
