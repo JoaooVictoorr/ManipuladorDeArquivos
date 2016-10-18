@@ -21,10 +21,12 @@ import java.util.ArrayList;
  * @author joao.piccoli
  */
 public class SeparadorDePalavras extends TelaPrincipal {
-    protected File separador = new File(caminhoDescompressao + "Palavras_Separadas_Por_Linhas.txt");
+    protected File separador;
+    public String caminhoSeparadorPalavras;
     
     public void Separar(File arquivo) throws IOException {
-
+        SeparacaoDeSilabas ss = new SeparacaoDeSilabas();
+        separador = new File(caminhoSeparadorPalavras + "\\Palavras_Separadas_Por_Linhas.txt");
         String[] separar;
         separador.createNewFile();
         Ler leitura = new Ler();
@@ -54,6 +56,10 @@ public class SeparadorDePalavras extends TelaPrincipal {
                 }
          escrever.close();
             //} 
+    }
+
+    public File getSeparador() {
+        return separador;
     }
 }
         

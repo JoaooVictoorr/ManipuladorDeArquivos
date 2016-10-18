@@ -153,11 +153,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
               btnSelecionarArquivo.requestFocusInWindow();
             }
           else
-          { 
-               JFileChooser chooserComprimir = new JFileChooser();
+          {    JFileChooser chooserComprimir = new JFileChooser();
+               chooserComprimir = new JFileChooser();
                chooserComprimir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+               chooserComprimir.setDialogTitle("Selecione onde deseja salvar a compactação");
                chooserComprimir.showSaveDialog(this);
-               caminhoDescompressao = chooserComprimir.getCurrentDirectory();
+               caminhoDescompressao = chooserComprimir.getSelectedFile();
+               separar.caminhoSeparadorPalavras = caminhoDescompressao.getAbsolutePath();
+               separacaoDeSilabas.caminhoSilabas = caminhoDescompressao.getAbsolutePath();
           }
         try {
             //escrever.Escrever(arquivo);

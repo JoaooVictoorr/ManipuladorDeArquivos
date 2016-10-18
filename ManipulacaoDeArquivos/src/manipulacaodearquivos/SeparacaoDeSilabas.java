@@ -19,15 +19,17 @@ import java.util.ArrayList;
  * @author joao.macedo
  */
 public class SeparacaoDeSilabas extends SeparadorDePalavras {
- protected File palavrasSeparadas = new File("C:\\Users\\João Victor\\Desktop\\Separação_De_Sílabas.txt");
+ public String caminhoSilabas;
+ protected File palavrasSeparadas;
+ public File separadorFile;
  public void Regras() throws IOException {
        
-   
         VerificarCaractere vv = new VerificarCaractere();
         SeparadorDePalavras sdp = new SeparadorDePalavras();
+        palavrasSeparadas = new File(caminhoSilabas + "\\Separação_De_Sílabas.txt");
         palavrasSeparadas.createNewFile();
         ArrayList<String> palavras = new ArrayList<>();
-        InputStreamReader reader = new InputStreamReader(new FileInputStream(separador),"Windows-1252");
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(separadorFile),"Windows-1252");
         BufferedReader ler = new BufferedReader(reader);
         RegrasHifenizacao rh = new RegrasHifenizacao();
 
