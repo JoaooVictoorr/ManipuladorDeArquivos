@@ -22,7 +22,7 @@ public class SeparacaoDeSilabas extends SeparadorDePalavras {
  public String caminhoSilabas;
  protected File palavrasSeparadas;
  public File separadorFile;
- public void Regras() throws IOException {
+ public File Regras() throws IOException {
        
         VerificarCaractere vv = new VerificarCaractere();
         SeparadorDePalavras sdp = new SeparadorDePalavras();
@@ -42,8 +42,8 @@ public class SeparacaoDeSilabas extends SeparadorDePalavras {
                 linha = ler.readLine();
             }
         }
-        
-        rh.Inicializar(true);
+        File arquivoSilabasSeparadas = palavrasSeparadas;
+        rh.Inicializar(true, arquivoSilabasSeparadas );
      
         for (int i = 0; i <= palavras.size(); i++)
         {
@@ -58,6 +58,7 @@ public class SeparacaoDeSilabas extends SeparadorDePalavras {
           
             
         }     
+     return palavrasSeparadas;
       
     
     }

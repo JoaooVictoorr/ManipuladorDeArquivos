@@ -5,6 +5,10 @@
  */
 package Interface;
 
+import huffman.HuffmanFunctions;
+import static huffman.HuffmanFunctions.buildTree;
+import static huffman.HuffmanFunctions.printCodes;
+import huffman.HuffmanTree;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.ImageCursor;
@@ -21,6 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import manipulacaodearquivos.Conversao;
 import manipulacaodearquivos.Criar;
 import manipulacaodearquivos.Escrever;
+import manipulacaodearquivos.Ler;
 import manipulacaodearquivos.ManipulacaoDeArquivos;
 import manipulacaodearquivos.SeparacaoDeSilabas;
 import manipulacaodearquivos.SeparadorDePalavras;
@@ -53,6 +59,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         areaLeitura = new javax.swing.JTextArea();
         btnComprimir = new javax.swing.JButton();
         labelCaminho = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +86,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         labelCaminho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jMenu1.setText("Sobre");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Informações");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,7 +129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(labelCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(btnComprimir)
                 .addContainerGap())
         );
@@ -139,10 +163,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnComprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprimirActionPerformed
 
-        //Escrever escrever = new Escrever();
+        Escrever escrever = new Escrever();
+        Conversao c = new Conversao();
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
+        Ler ler = new Ler();
+        String[] test;
+        File arquivoLeitura = null;
+        File arquivoCompressao = null;
         Criar criar = new Criar();
 
         File arquivo = new File(labelCaminho.getText());
@@ -161,27 +190,76 @@ public class TelaPrincipal extends javax.swing.JFrame {
                caminhoDescompressao = chooserComprimir.getSelectedFile();
                separar.caminhoSeparadorPalavras = caminhoDescompressao.getAbsolutePath();
                separacaoDeSilabas.caminhoSilabas = caminhoDescompressao.getAbsolutePath();
+               silabas.caminhoSilabasLinha = caminhoDescompressao.getAbsolutePath();
+               
           }
         try {
             //escrever.Escrever(arquivo);
             //ler.Leitura(arquivo);
-            separar.Separar(arquivo);
+            separacaoDeSilabas.separadorFile = separar.Separar(arquivo);
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            separacaoDeSilabas.Regras();
+            silabas.palavrasSeparadasFile = separacaoDeSilabas.Regras();
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            silabas.Separar(arquivo);
+           arquivoLeitura = silabas.Separar(arquivo);
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            ler.Leitura(arquivoLeitura);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        test = new String[ler.retorno.size()];
+        int i=0;
+        for(String sílabas : ler.retorno)
+        {
+            test[i] = ler.retorno.get(i);
+            i++;
+        }
+        
+        HuffmanFunctions hf = new HuffmanFunctions();
+        hf.MedirFrequencia(test);
+        HuffmanTree tree = buildTree(hf.sf);
+        
+        System.out.println("TABELA DE CÓDIGOS");
+        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
+        printCodes(tree, new StringBuffer());
+//        
+        // Compactar o texto
+        String encode = hf.encode(tree,test);
+        // Mostrar o texto Compactado
+        System.out.println("\nTEXTO COMPACTADO");
+        System.out.println(encode); 
+        
+        ArrayList<Integer> decimal = c.ConverterBinDec(encode.toCharArray());
+        
+        try {
+            arquivoCompressao = escrever.EscreverChar(c.TransformarEmSimbolo(decimal), caminhoDescompressao + "\\TextoCompactado.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Ler descompactar = new Ler();
+        try {
+            descompactar.Leitura(arquivoCompressao);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        
         
         
     }//GEN-LAST:event_btnComprimirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+      JOptionPane.showMessageDialog(null, "Ferramenta para teste de compressao (TCC) \n Produzida por: Igor Abdallah de Carvalho \n João Victor Silva de Macedo \n João Victor Silveira Piccoli \n Orientador: Alexandre Moraes Lovisi", "Créditos", JOptionPane.INFORMATION_MESSAGE, null);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,6 +300,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea areaLeitura;
     private javax.swing.JButton btnComprimir;
     private javax.swing.JButton btnSelecionarArquivo;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCaminho;
     // End of variables declaration//GEN-END:variables

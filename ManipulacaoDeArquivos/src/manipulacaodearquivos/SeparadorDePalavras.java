@@ -24,7 +24,7 @@ public class SeparadorDePalavras extends TelaPrincipal {
     protected File separador;
     public String caminhoSeparadorPalavras;
     
-    public void Separar(File arquivo) throws IOException {
+    public File Separar(File arquivo) throws IOException {
         SeparacaoDeSilabas ss = new SeparacaoDeSilabas();
         separador = new File(caminhoSeparadorPalavras + "\\Palavras_Separadas_Por_Linhas.txt");
         String[] separar;
@@ -56,11 +56,12 @@ public class SeparadorDePalavras extends TelaPrincipal {
                 }
          escrever.close();
             //} 
+         
+         return separador;
     }
-
-    public File getSeparador() {
-        return separador;
-    }
+   
 }
+
+
         
        

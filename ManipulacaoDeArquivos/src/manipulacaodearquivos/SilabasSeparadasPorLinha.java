@@ -20,15 +20,18 @@ import java.util.ArrayList;
  * @author joao.piccoli
  */
 public class SilabasSeparadasPorLinha extends SeparacaoDeSilabas{
-    
-        protected File separador = new File("C:\\Users\\João Victor\\Desktop\\Sílabas_Separadas_Por_Linha.txt");
+    public String caminhoSilabasLinha;
+   
+    protected File separador;
+    public File palavrasSeparadasFile;
         
-    public void Separar(File arquivo) throws IOException {
+    public File Separar(File arquivo) throws IOException {
 
         String[] separar;
+        separador = new File(caminhoSilabasLinha+"\\Sílabas_Separadas_Por_Linha.txt");
         separador.createNewFile();
         Ler leitura = new Ler();
-        InputStreamReader read = new InputStreamReader(new FileInputStream(palavrasSeparadas));
+        InputStreamReader read = new InputStreamReader(new FileInputStream(palavrasSeparadasFile));
         OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(separador),"Windows-1252");
         BufferedWriter escrever = new BufferedWriter(write);
         BufferedReader ler = new BufferedReader(read);
@@ -54,6 +57,7 @@ public class SilabasSeparadasPorLinha extends SeparacaoDeSilabas{
                 }
          escrever.close();
             } 
+            return separador;
     }
   
 }

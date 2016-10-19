@@ -34,13 +34,13 @@ public class ManipulacaoDeArquivos {
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
         Conversao c = new Conversao();
-
+        File arquivoLeitura;
         File arquivo = criar.CriarArquivo("C:\\Users\\João Victor\\Desktop\\Teste.txt");
         //escrever.Escrever(arquivo);
         //ler.Leitura(arquivo);
         separar.Separar(arquivo);
         separacaoDeSilabas.Regras();
-        silabas.Separar(arquivo);
+        arquivoLeitura = silabas.Separar(arquivo);
         
  
         
@@ -51,7 +51,7 @@ public class ManipulacaoDeArquivos {
         
         
         
-         ler.Leitura("C:\\Users\\João Victor\\Desktop\\Sílabas_Separadas_Por_Linha.txt");//"paralelepipedo"; // Tamanho do texto = 112 bits 
+         ler.Leitura(arquivoLeitura);//"paralelepipedo"; // Tamanho do texto = 112 bits 
          test = new String[ler.retorno.size()];
          int i=0;
          for(String sílabas : ler.retorno)
@@ -89,7 +89,7 @@ public class ManipulacaoDeArquivos {
         
         escrever.EscreverChar(c.TransformarEmSimbolo(decimal), "C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
         Ler descompactar = new Ler();
-        descompactar.Leitura("C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
+      // PARTE IMPORTANTE //descompactar.Leitura("C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
        
         encode = c.TransformarSimbEmBin(descompactar.retorno);
         

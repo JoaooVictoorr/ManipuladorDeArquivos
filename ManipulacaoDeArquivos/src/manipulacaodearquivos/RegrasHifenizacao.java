@@ -1,6 +1,7 @@
 package manipulacaodearquivos;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,11 +12,11 @@ import java.io.IOException;
 public class RegrasHifenizacao extends SeparacaoDeSilabas {
     private FileWriter writer;
     private BufferedWriter escrever;
-    public boolean Inicializar(boolean status) throws IOException
+    public boolean Inicializar(boolean status, File arquivo) throws IOException
     {
         if(status == true)
         {
-        writer = new FileWriter(palavrasSeparadas);
+        writer = new FileWriter(arquivo);
         escrever = new BufferedWriter(writer);
         return true;
         }

@@ -24,9 +24,9 @@ public class Ler {
     
     public List<String> retorno = new ArrayList<>();
     
-    public String Leitura(String caminho) throws IOException
+    public String Leitura(File arquivo) throws IOException
     { 
-          InputStreamReader reader = new InputStreamReader(new FileInputStream(caminho),"UTF-8");
+          InputStreamReader reader = new InputStreamReader(new FileInputStream(arquivo),"UTF-8");
           BufferedReader ler = new BufferedReader(reader);
           String linha = ler.readLine();
           
