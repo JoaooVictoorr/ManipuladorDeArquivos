@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author joao.piccoli
  */
-public class SeparadorDePalavras extends TelaPrincipal {
+public class SeparadorDePalavras {
     protected File separador;
     public String caminhoSeparadorPalavras;
     

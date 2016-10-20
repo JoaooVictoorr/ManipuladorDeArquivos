@@ -9,6 +9,7 @@ import huffman.HuffmanFunctions;
 import static huffman.HuffmanFunctions.buildTree;
 import static huffman.HuffmanFunctions.printCodes;
 import huffman.HuffmanTree;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +18,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.ImageCursor;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import manipulacaodearquivos.CalcularDiferencaTamanho;
 import manipulacaodearquivos.Conversao;
 import manipulacaodearquivos.Criar;
 import manipulacaodearquivos.Escrever;
@@ -41,9 +48,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaPrincipal() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         initComponents();
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        SwingUtilities.updateComponentTreeUI((this));
+        setIcon();
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +70,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         areaLeitura = new javax.swing.JTextArea();
         btnComprimir = new javax.swing.JButton();
         labelCaminho = new javax.swing.JLabel();
+        labelResultadoDescompressao = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -87,6 +99,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         labelCaminho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        labelResultadoDescompressao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelResultadoDescompressao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         jMenu1.setText("Sobre");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
@@ -113,12 +128,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSelecionarArquivo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelCaminho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(labelCaminho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnComprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelResultadoDescompressao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnComprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(183, 183, 183))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +145,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(btnComprimir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnComprimir)
+                    .addComponent(labelResultadoDescompressao))
                 .addContainerGap())
         );
 
@@ -165,6 +182,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         Escrever escrever = new Escrever();
         Conversao c = new Conversao();
+        CalcularDiferencaTamanho cdt = new CalcularDiferencaTamanho();
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
@@ -245,6 +263,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+        labelResultadoDescompressao.setText("O ARQUIVO FOI COMPRIMIDO EM " + cdt.CalcularDiferencaPorcentagem(arquivo, arquivoCompressao)+ "%" );
+        
         Ler descompactar = new Ler();
         try {
             descompactar.Leitura(arquivoCompressao);
@@ -258,7 +279,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprimirActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-      JOptionPane.showMessageDialog(null, "Ferramenta para teste de compressao (TCC) \n Produzida por: Igor Abdallah de Carvalho \n João Victor Silva de Macedo \n João Victor Silveira Piccoli \n Orientador: Alexandre Moraes Lovisi", "Créditos", JOptionPane.INFORMATION_MESSAGE, null);
+      JOptionPane.showMessageDialog(null, "Ferramenta para teste de compressao (TCC) \n\n Produzida por:\n\n Igor Abdallah de Carvalho \n\n João Victor Silva de Macedo \n\n  João Victor Silveira Piccoli \n\n Orientador: Alexandre Moraes Lovisi", "Créditos", JOptionPane.INFORMATION_MESSAGE, null);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -291,7 +312,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                try {
+                    new TelaPrincipal().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -305,5 +336,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCaminho;
+    private javax.swing.JLabel labelResultadoDescompressao;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+           setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icon.png")));
+    }
 }
