@@ -24,7 +24,7 @@ public class ManipulacaoDeArquivos {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void Classe() throws IOException {
 
         Criar criar = new Criar();
         Ler ler = new Ler();
