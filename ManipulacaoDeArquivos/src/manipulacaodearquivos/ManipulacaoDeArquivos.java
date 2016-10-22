@@ -89,7 +89,7 @@ public class ManipulacaoDeArquivos {
         
         escrever.EscreverChar(c.TransformarEmSimbolo(decimal), "C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
         Ler descompactar = new Ler();
-      // PARTE IMPORTANTE //descompactar.Leitura("C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
+        //descompactar.Leitura("C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
        
         encode = c.TransformarSimbEmBin(descompactar.retorno);
         

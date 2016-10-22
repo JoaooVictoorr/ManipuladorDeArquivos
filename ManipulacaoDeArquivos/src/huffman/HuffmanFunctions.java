@@ -151,7 +151,7 @@ public class HuffmanFunctions {
 		return null;
     }
     
-    public String MedirFrequencia(String[] silaba)
+    public SilabaFreq[] MedirFrequencia(String[] silaba)
     {
        TransferirPalavra tp = new TransferirPalavra();
        String[] comparar = new String[silaba.length];
@@ -210,6 +210,6 @@ public class HuffmanFunctions {
            sf[u] = passar;
          u++;
        }
-          return sf.toString();
+          return sf;
 }
 }
