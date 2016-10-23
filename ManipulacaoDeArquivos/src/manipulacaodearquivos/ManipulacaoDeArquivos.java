@@ -91,7 +91,7 @@ public class ManipulacaoDeArquivos {
         Ler descompactar = new Ler();
         //descompactar.Leitura("C:\\Users\\João Victor\\Desktop\\TextoCompactado.txt");
        
-        encode = c.TransformarSimbEmBin(descompactar.retorno);
+        encode = c.TransformarSimbEmBin(descompactar.retorno,false);
         
 //        
         // Decodificar o texto

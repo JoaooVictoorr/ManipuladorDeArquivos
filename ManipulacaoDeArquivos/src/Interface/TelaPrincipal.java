@@ -72,7 +72,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         areaLeitura = new javax.swing.JTextArea();
         btnComprimir = new javax.swing.JButton();
         labelCaminho = new javax.swing.JLabel();
-        labelResultadoDescompressao = new javax.swing.JLabel();
         btnDescomprimir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -101,9 +100,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         labelCaminho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        labelResultadoDescompressao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelResultadoDescompressao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnDescomprimir.setText("Descomprimir");
         btnDescomprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -141,9 +137,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(labelCaminho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnComprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelResultadoDescompressao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(144, 144, 144)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDescomprimir)))
                 .addContainerGap())
         );
@@ -159,7 +153,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnComprimir)
-                    .addComponent(labelResultadoDescompressao)
                     .addComponent(btnDescomprimir))
                 .addContainerGap())
         );
@@ -168,7 +161,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
         public File caminhoDescompressao;
         public SilabaFreq[] pegarSf;
-        public char[]guardar;
+        public String pegar;
     private void btnSelecionarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarArquivoActionPerformed
        
         JFileChooser chooser = new JFileChooser();
@@ -271,9 +264,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Mostrar o texto Compactado
         System.out.println("\nTEXTO COMPACTADO");
         System.out.println(encode); 
-        
+        pegar = encode;
         ArrayList<Integer> decimal = c.ConverterBinDec(encode.toCharArray());
-        
         try {
             arquivoCompressao = escrever.EscreverChar(c.TransformarEmSimbolo(decimal), caminhoDescompressao + "\\TextoCompactado.txt");
         } catch (IOException ex) {
@@ -307,10 +299,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.showSaveDialog(this);
         String caminhoDescompactacao = chooser.getSelectedFile().getAbsolutePath();
-        
-        
-        
-        
+        c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
         Ler descompactar = new Ler();
         try {
             descompactar.Leitura(arquivo);
@@ -318,7 +307,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        String encode = c.TransformarSimbEmBin(descompactar.retorno);
+        String encode = c.TransformarSimbEmBin(descompactar.retorno,false);
         
         HuffmanTree tree = buildTree(pegarSf);
         // Decodificar o texto
@@ -387,7 +376,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCaminho;
-    private javax.swing.JLabel labelResultadoDescompressao;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

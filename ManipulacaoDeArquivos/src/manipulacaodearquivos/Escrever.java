@@ -34,7 +34,7 @@ public class Escrever {
        Criar c = new Criar();
        File arquivo = c.CriarArquivo(caminho);
 
-        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo),"Windows-1252");
+        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo),"UTF-8");
         try (BufferedWriter escrever = new BufferedWriter(write)) {
              escrever.write(conteudo);
         }

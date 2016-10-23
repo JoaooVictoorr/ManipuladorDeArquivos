@@ -5,6 +5,7 @@
  */
 package manipulacaodearquivos;
 
+import Interface.TelaPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,10 @@ import java.util.List;
  *
  * @author joao.piccoli
  */
-public class Conversao  
+public class Conversao 
 {
+    public int tamanhoComparar;
+    public int diferenca;
     public ArrayList<Integer> ConverterBinDec(char[] binario)
     {
         int limite = binario.length/8;
@@ -60,6 +63,13 @@ public class Conversao
         return formaDecimal;
     }
     
+    public int PuxarValor(char[]valor)
+    {
+       int tamanho;
+       tamanho = valor.length;
+       return tamanho;
+    }
+    
     
     public int TransformarEmDecimal(String valor)
     {
@@ -96,10 +106,11 @@ public class Conversao
        return simbolos;
     }
     
-    public String TransformarSimbEmBin(List<String> valor)
+    public String TransformarSimbEmBin(List<String> valor, boolean verificar)
     {
         int i = 0;
-        int k = 0;
+        int k;
+        List<String>reajuste = valor;
         String bin ="";
         String descompactadoInt;
         char[] aux;
@@ -118,10 +129,16 @@ public class Conversao
               if(k != aux.length - 1)
               bin += TransformarDecEmBinario(novoValor[k], true, false);
               else
-              bin += TransformarDecEmBinario(novoValor[k], false, true);             
+              bin += TransformarDecEmBinario(novoValor[k], false, verificar);             
           }  
         } 
-        
+     
+        while(bin.toCharArray().length != tamanhoComparar)
+        {
+          diferenca = tamanhoComparar - bin.toCharArray().length;   
+          return TransformarSimbEmBin(reajuste, true);
+        }
+          
         return bin;
         
         //SOLUÇÃO PROVISÓRIA
@@ -136,6 +153,7 @@ public class Conversao
     
     public String TransformarDecEmBinario(int valor, boolean inserir, boolean verificar)
     {
+        
         String resultado = "";
         ArrayList<Integer> valores = new ArrayList<>();
         int resto;
@@ -148,7 +166,7 @@ public class Conversao
           valor = (valor / 2);
           i++;
         }
-        
+       
         
         if(valores.size()<9 && inserir)
         {
@@ -156,12 +174,12 @@ public class Conversao
              valores.add(0);
         }
         
-//        if(verificar)
-//        {
-//            int adicionar = valores.size() - guardar.length;
-//            for(int j = 0; j<=adicionar-i; j++)
-//             valores.add(0); 
-//        }
+        if(verificar)
+        {
+            int adicionar = diferenca;
+            for(int j = 0; j<adicionar; j++)
+             valores.add(0); 
+        }
         
 
         for(int j = valores.size()-1; j >= 0; j--)
