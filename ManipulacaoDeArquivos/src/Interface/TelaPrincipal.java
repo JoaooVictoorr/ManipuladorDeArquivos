@@ -15,9 +15,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +38,7 @@ import manipulacaodearquivos.CalcularDiferencaTamanho;
 import manipulacaodearquivos.Conversao;
 import manipulacaodearquivos.Criar;
 import manipulacaodearquivos.Escrever;
+import manipulacaodearquivos.EscreverListaArvore;
 import manipulacaodearquivos.Ler;
 import manipulacaodearquivos.ManipulacaoDeArquivos;
 import manipulacaodearquivos.SeparacaoDeSilabas;
@@ -162,6 +167,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public File caminhoDescompressao;
         public SilabaFreq[] pegarSf;
         public String pegar;
+        public  EscreverListaArvore[] recuperarValor;
     private void btnSelecionarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarArquivoActionPerformed
        
         JFileChooser chooser = new JFileChooser();
@@ -253,6 +259,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
         HuffmanFunctions hf = new HuffmanFunctions();
         pegarSf =  hf.MedirFrequencia(test);
         
+        
+       
+        try {
+            FileOutputStream fos = new FileOutputStream(caminhoDescompressao + "\\Árvore.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            EscreverListaArvore[] sfGuardar = new EscreverListaArvore[pegarSf.length];
+            int k = 0;
+              for(SilabaFreq v : pegarSf)
+               {
+                  sfGuardar[k] = new EscreverListaArvore(v.silaba, v.frequencia);
+                  //EscreverListaArvore[] sfGuardar = {new EscreverListaArvore(v.silaba, v.frequencia)};
+                  k++;
+               }
+              oos.writeObject(sfGuardar);
+              
+             
+        
+              
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+  
+      
+        
+    
+         
+          
+            
+         
+   
         HuffmanTree tree = buildTree(hf.sf);
         
         System.out.println("TABELA DE CÓDIGOS");
@@ -299,7 +338,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.showSaveDialog(this);
         String caminhoDescompactacao = chooser.getSelectedFile().getAbsolutePath();
-        c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
+        
+        if(pegar == null)
+        {
+     
+              
+            try {
+                  FileInputStream fis = new FileInputStream("C:\\Users\\joao.piccoli\\Desktop\\Árvore.txt");
+                  ObjectInputStream ois = new ObjectInputStream(fis);
+                  recuperarValor = (EscreverListaArvore[]) ois.readObject();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              
+                
+            
+        }
+        else
+        {
+          c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
+        }
+       
         Ler descompactar = new Ler();
         try {
             descompactar.Leitura(arquivo);
