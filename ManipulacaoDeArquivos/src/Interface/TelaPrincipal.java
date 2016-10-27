@@ -38,6 +38,7 @@ import manipulacaodearquivos.CalcularDiferencaTamanho;
 import manipulacaodearquivos.Conversao;
 import manipulacaodearquivos.Criar;
 import manipulacaodearquivos.Escrever;
+import manipulacaodearquivos.EscreverBin;
 import manipulacaodearquivos.EscreverListaArvore;
 import manipulacaodearquivos.Ler;
 import manipulacaodearquivos.ManipulacaoDeArquivos;
@@ -167,7 +168,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public File caminhoDescompressao;
         public SilabaFreq[] pegarSf;
         public String pegar;
-        public  EscreverListaArvore[] recuperarValor;
+        public EscreverListaArvore[] recuperarValor;
+        public EscreverBin binRecuperar;
     private void btnSelecionarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarArquivoActionPerformed
        
         JFileChooser chooser = new JFileChooser();
@@ -258,21 +260,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         HuffmanFunctions hf = new HuffmanFunctions();
         pegarSf =  hf.MedirFrequencia(test);
+   
         
+        HuffmanTree tree = buildTree(hf.sf);
         
-       
-        try {
+        System.out.println("TABELA DE CÓDIGOS");
+        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
+        printCodes(tree, new StringBuffer());
+//        
+        // Compactar o texto
+        String encode = hf.encode(tree,test);
+        
+          try {
             FileOutputStream fos = new FileOutputStream(caminhoDescompressao + "\\Árvore.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             EscreverListaArvore[] sfGuardar = new EscreverListaArvore[pegarSf.length];
+            EscreverBin bin = new EscreverBin(encode);
             int k = 0;
               for(SilabaFreq v : pegarSf)
                {
-                  sfGuardar[k] = new EscreverListaArvore(v.silaba, v.frequencia);
+                    sfGuardar[k] = new EscreverListaArvore(v.silaba, v.frequencia);
                   //EscreverListaArvore[] sfGuardar = {new EscreverListaArvore(v.silaba, v.frequencia)};
                   k++;
                }
               oos.writeObject(sfGuardar);
+              oos.writeObject(bin);
               
              
         
@@ -282,24 +294,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-  
-      
         
-    
-         
-          
-            
-         
-   
-        HuffmanTree tree = buildTree(hf.sf);
         
-        System.out.println("TABELA DE CÓDIGOS");
-        System.out.println("SÍMBOLO\tQUANTIDADE\tHUFFMAN CÓDIGO");
-        printCodes(tree, new StringBuffer());
-//        
-        // Compactar o texto
-        String encode = hf.encode(tree,test);
         // Mostrar o texto Compactado
         System.out.println("\nTEXTO COMPACTADO");
         System.out.println(encode); 
@@ -340,13 +336,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         String caminhoDescompactacao = chooser.getSelectedFile().getAbsolutePath();
         
         if(pegar == null)
-        {
-     
-              
+        { 
             try {
                   FileInputStream fis = new FileInputStream("C:\\Users\\joao.piccoli\\Desktop\\Árvore.txt");
                   ObjectInputStream ois = new ObjectInputStream(fis);
                   recuperarValor = (EscreverListaArvore[]) ois.readObject();
+                  binRecuperar = (EscreverBin) ois.readObject();
+        
+                  
+                  c.tamanhoComparar = binRecuperar.bin.toString().length();
+                  
+      
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -354,14 +354,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-              
-                
-            
         }
         else
         {
           c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
         }
+        
        
         Ler descompactar = new Ler();
         try {
@@ -372,8 +370,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
        
         String encode = c.TransformarSimbEmBin(descompactar.retorno,false);
         
+       if(pegarSf != null)
+       {
         HuffmanTree tree = buildTree(pegarSf);
-        // Decodificar o texto
+          // Decodificar o texto
         System.out.println("\n\nTEXTO DECODIFICADO");
         System.out.println(decode(tree,encode));
         String descompactado = decode(tree,encode);
@@ -382,6 +382,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
+       else
+       { 
+           int k = 0;
+           int tamanho = 0;
+        
+           for(EscreverListaArvore i : recuperarValor)
+            tamanho ++;
+           
+           pegarSf = new SilabaFreq[tamanho];
+         
+           for(EscreverListaArvore i : recuperarValor)
+           {   
+               pegarSf[k] = new SilabaFreq();
+               pegarSf[k].silaba = i.silaba;
+               pegarSf[k].frequencia = i.frequencia;
+               k++;
+           }
+           HuffmanTree tree = buildTree(pegarSf);
+          // Decodificar o texto
+        System.out.println("\n\nTEXTO DECODIFICADO");
+        System.out.println(decode(tree,encode));
+        String descompactado = decode(tree,encode);
+        try {
+            escrever.EscreverString(descompactado, caminhoDescompactacao +"\\TextoDescompactado.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       }
+      
+      
     }//GEN-LAST:event_btnDescomprimirActionPerformed
 
     /**

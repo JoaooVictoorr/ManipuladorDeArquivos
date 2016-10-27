@@ -11,19 +11,14 @@ import java.io.Serializable;
  *
  * @author joao.piccoli
  */
-public class EscreverListaArvore implements Serializable {
+public class EscreverBin implements Serializable{
     
-   public String silaba;
-   public int frequencia;
+    public String bin;
     
-    public EscreverListaArvore(String silaba, int frequencia)
+    
+    public EscreverBin(String bin)
     {
-        this.silaba = silaba;
-        this.frequencia = frequencia;    
-    } 
-    
-    public void Transformar()
-    {
-        
+        this.bin = bin;
     }
+    
 }
