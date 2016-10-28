@@ -26,20 +26,23 @@ public class Escrever {
             for(char i: conteudo)
              escrever.write(i);
         }
-
         return arquivo;
     }
     
     public File EscreverString(String conteudo, String caminho) throws IOException {
        Criar c = new Criar();
        File arquivo = c.CriarArquivo(caminho);
-
-        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo),"UTF-8");
+        char[] ajusteLinha = conteudo.toCharArray();
+        
+        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo), "UTF-8");
         try (BufferedWriter escrever = new BufferedWriter(write)) {
-             escrever.write(conteudo);
+            
+            for(char i : ajusteLinha)
+            {
+                if(i == '*')escrever.append("\r\n");
+                else escrever.append(i);  
+            }
         }
-
         return arquivo;
     }
-
 }

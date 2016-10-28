@@ -38,7 +38,7 @@ public class SeparacaoDeSilabas extends SeparadorDePalavras {
             if (linha.equals("")) {
                 linha = ler.readLine();
             } else {
-                palavras.add(linha);
+                palavras.add(linha + "*");
                 linha = ler.readLine();
             }
         }

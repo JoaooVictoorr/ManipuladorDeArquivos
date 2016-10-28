@@ -32,6 +32,5 @@ public class VerificarCaractere {
                 return true;       
         }
         return false;
-
     }
 }

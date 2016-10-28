@@ -224,8 +224,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                caminhoDescompressao = chooserComprimir.getSelectedFile();
                separar.caminhoSeparadorPalavras = caminhoDescompressao.getAbsolutePath();
                separacaoDeSilabas.caminhoSilabas = caminhoDescompressao.getAbsolutePath();
-               silabas.caminhoSilabasLinha = caminhoDescompressao.getAbsolutePath();
-               
+               silabas.caminhoSilabasLinha = caminhoDescompressao.getAbsolutePath();      
           }
         try {
             //escrever.Escrever(arquivo);
@@ -272,7 +271,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         String encode = hf.encode(tree,test);
         
           try {
-            FileOutputStream fos = new FileOutputStream(caminhoDescompressao + "\\Árvore.txt");
+            String nomeUsuario = System.getProperty("user.name");
+            FileOutputStream fos = new FileOutputStream("C:\\Users\\"+nomeUsuario+"\\Documents\\Árvore.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             EscreverListaArvore[] sfGuardar = new EscreverListaArvore[pegarSf.length];
             EscreverBin bin = new EscreverBin(encode);
@@ -302,7 +302,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pegar = encode;
         ArrayList<Integer> decimal = c.ConverterBinDec(encode.toCharArray());
         try {
-            arquivoCompressao = escrever.EscreverChar(c.TransformarEmSimbolo(decimal), caminhoDescompressao + "\\TextoCompactado.txt");
+            arquivoCompressao = escrever.EscreverChar(c.TransformarEmSimbolo(decimal), caminhoDescompressao + "\\TextoCompactado.sil");
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -325,7 +325,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Escrever escrever = new Escrever();
         HuffmanFunctions hf = new HuffmanFunctions();
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter(".txt", "txt");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter(".sil", "sil");
         chooser.setDialogTitle("Selecione o .TXT a ser descomprimido");
         chooser.setFileFilter(filtro);
         chooser.showOpenDialog(this);
@@ -338,15 +338,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if(pegar == null)
         { 
             try {
-                  FileInputStream fis = new FileInputStream("C:\\Users\\joao.piccoli\\Desktop\\Árvore.txt");
+                  String nomeUsuario = System.getProperty("user.name");
+                  FileInputStream fis = new FileInputStream("C:\\Users\\"+nomeUsuario+"\\Documents\\Árvore.ser");
                   ObjectInputStream ois = new ObjectInputStream(fis);
                   recuperarValor = (EscreverListaArvore[]) ois.readObject();
                   binRecuperar = (EscreverBin) ois.readObject();
-        
-                  
                   c.tamanhoComparar = binRecuperar.bin.toString().length();
-                  
-      
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
