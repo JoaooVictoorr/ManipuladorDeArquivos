@@ -12,7 +12,7 @@ package manipulacaodearquivos;
 public class VerificarCaractere {
 
     public boolean VerificarVogal(char letra) {
-        char[] vogais = {'a', 'e', 'i', 'o', 'u'};
+        char[] vogais = {'a', 'e', 'i', 'o', 'u','A', 'E', 'I', 'O', 'U'};
 
         for (int i = 0; i < vogais.length; i++) 
         {
@@ -22,6 +22,19 @@ public class VerificarCaractere {
         return false;
 
     }
+    
+     public boolean VerificarNumero(char letra) {
+        char[] numeros = {'0', '1', '2', '3', '4','5', '6', '7', '8', '9'};
+
+        for (int i = 0; i < numeros.length; i++) 
+        {
+            if (letra == numeros[i]) 
+                return true;       
+        }
+        return false;
+
+    }
+   
     
       public boolean VerificarCharEspecial(char letra) {
         char[] especiais = {'.', ';', '!', '?', ':', ','};

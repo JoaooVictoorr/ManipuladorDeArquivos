@@ -37,7 +37,40 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
         // REGRAS COMEÇAM A PARTIR DAQUI
             for(int j = 0; j<tp.transferencia.length; j++)
             {  
-               if(tp.transferencia[j] == ' ')
+               if(vc.VerificarNumero(tp.transferencia[j])) 
+               {
+                   if(j - 1 >= 0 && j + 1 <= fim )
+                   {
+                        if(tp.transferencia[j-1] == ' ' && vc.VerificarNumero(tp.transferencia[j+1]))
+                        {
+                            escrever.append(tp.transferencia[j]);
+                            escrever.append('-');
+                        }
+                        
+                        else if(tp.transferencia[j+1] == ' ' && vc.VerificarNumero(tp.transferencia[j-1]))
+                        {
+                            escrever.append(tp.transferencia[j]);
+                        }
+                        
+                        else if(vc.VerificarNumero(tp.transferencia[j-1]) && vc.VerificarNumero(tp.transferencia[j+1]))
+                        {
+                            escrever.append(tp.transferencia[j]);
+                            escrever.append('-');
+                        }
+                        else
+                        {
+                            escrever.append(tp.transferencia[j]);
+                        }
+                   }
+                   else
+                   {
+                    
+                           escrever.append(tp.transferencia[j]);
+                    
+                   }
+               }
+               
+               else if(tp.transferencia[j] == ' ')
                {
                    escrever.append('-');
                    escrever.append(tp.transferencia[j]);
@@ -45,7 +78,15 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                }
                else if(j - 1 >= 0 && j + 1 <= fim && (tp.transferencia[j-1] == ' ' || tp.transferencia[j+1] == ' '))
                {
-                   escrever.append(tp.transferencia[j]);
+                   if(tp.transferencia[j]=='á' && (tp.transferencia[j+1] == 'r' || tp.transferencia[j+1] == 'l')) 
+                   {
+                        escrever.append(tp.transferencia[j]);
+                   }
+                   else
+                   {
+                        escrever.append(tp.transferencia[j]);
+                        escrever.append('-');
+                   }
                }
                
                else if(vc.VerificarVogal(tp.transferencia[j]))
@@ -356,23 +397,20 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                     escrever.append(tp.transferencia[j]);
                    }
                      
-                  
-                     
-                  
-                  
-                    
-                  
-            
+
                    
               }
               else
               {
                   if(tp.transferencia[j] == 'ú' || tp.transferencia[j] == 'ó' || tp.transferencia[j] == 'á' || tp.transferencia[j] == 'é')
                   {
-                      if(j == 0 && tp.transferencia[j+1] != 'r')
+                      if(j == 0 && tp.transferencia[j+1] == 'r' )
                       {
                           escrever.append(tp.transferencia[j]);
-                          escrever.append('-');
+                      }
+                      if(j == 0 && tp.transferencia[j+1] == 'l')
+                      {
+                          escrever.append(tp.transferencia[j]);
                       }
                       else if(j != 0 && j + 1 <= fim && !vc.VerificarVogal(tp.transferencia[j-1]) && !vc.VerificarVogal(tp.transferencia[j+1]))
                       {
@@ -742,9 +780,26 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                         escrever.append(tp.transferencia[j]);
                     }
                     else if( j - 2 >=0 && j + 1 <= fim && tp.transferencia[j] == 'v')
+                    {   if(tp.transferencia[j-2] == 'á')
+                        {
+                            escrever.append(tp.transferencia[j]);
+                        }
+                        else
+                        {
+                            escrever.append('-');
+                            escrever.append(tp.transferencia[j]);
+                        }
+                    }
+                    else if(tp.transferencia[j] == 'p' && vc.VerificarVogal(tp.transferencia[j+1]) && vc.VerificarVogal(tp.transferencia[j-1]))
                     {
                         escrever.append('-');
                         escrever.append(tp.transferencia[j]);
+        
+                    }
+                    else if (tp.transferencia[j] == 'p' && !vc.VerificarVogal(tp.transferencia[j+1]) && vc.VerificarVogal(tp.transferencia[j-1]))
+                    {
+                     escrever.append(tp.transferencia[j]);
+                     escrever.append('-');
                     }
                 else
                 {
@@ -757,55 +812,6 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-             
-                   
-                  
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                 
             }
             
             escrever.append("\r\n");
