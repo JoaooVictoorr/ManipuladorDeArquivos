@@ -31,7 +31,7 @@ public class SilabasSeparadasPorLinha extends SeparacaoDeSilabas{
         separador = new File(caminhoSilabasLinha+"\\Sílabas_Separadas_Por_Linha.txt");
         separador.createNewFile();
         Ler leitura = new Ler();
-        InputStreamReader read = new InputStreamReader(new FileInputStream(palavrasSeparadasFile));
+        InputStreamReader read = new InputStreamReader(new FileInputStream(palavrasSeparadasFile), "Windows-1252");
         OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(separador),"Windows-1252");
         BufferedWriter escrever = new BufferedWriter(write);
         BufferedReader ler = new BufferedReader(read);

@@ -360,7 +360,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
        
         Ler descompactar = new Ler();
         try {
-            descompactar.Leitura(arquivo);
+            descompactar.LeituraUTF8(arquivo);
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

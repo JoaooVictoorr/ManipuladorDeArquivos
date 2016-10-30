@@ -21,9 +21,4 @@ public class EscreverListaArvore implements Serializable {
         this.silaba = silaba;
         this.frequencia = frequencia;    
     } 
-    
-    public void Transformar()
-    {
-        
-    }
 }

@@ -26,6 +26,21 @@ public class Ler {
     
     public String Leitura(File arquivo) throws IOException
     { 
+          InputStreamReader reader = new InputStreamReader(new FileInputStream(arquivo),"Windows-1252");
+          BufferedReader ler = new BufferedReader(reader);
+          String linha = ler.readLine();
+          
+        while (linha != null) {
+            retorno.add(linha);
+            System.out.println(linha);
+            linha = ler.readLine();
+        }
+        
+        return retorno.toString();
+    }
+    
+      public String LeituraUTF8(File arquivo) throws IOException
+    { 
           InputStreamReader reader = new InputStreamReader(new FileInputStream(arquivo),"UTF-8");
           BufferedReader ler = new BufferedReader(reader);
           String linha = ler.readLine();

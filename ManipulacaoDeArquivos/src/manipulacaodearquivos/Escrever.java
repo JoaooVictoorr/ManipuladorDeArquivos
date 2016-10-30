@@ -34,7 +34,7 @@ public class Escrever {
        File arquivo = c.CriarArquivo(caminho);
         char[] ajusteLinha = conteudo.toCharArray();
         
-        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo), "UTF-8");
+        OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(arquivo), "Windows-1252");
         try (BufferedWriter escrever = new BufferedWriter(write)) {
             
             for(char i : ajusteLinha)

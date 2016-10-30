@@ -2,21 +2,23 @@ package manipulacaodearquivos;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  *
  * @author João Victor
  */
 public class RegrasHifenizacao extends SeparacaoDeSilabas {
-    private FileWriter writer;
+    private OutputStreamWriter writer;
     private BufferedWriter escrever;
     public boolean Inicializar(boolean status, File arquivo) throws IOException
     {
         if(status == true)
         {
-        writer = new FileWriter(arquivo);
+        writer = new OutputStreamWriter(new FileOutputStream(arquivo),"Windows-1252");
         escrever = new BufferedWriter(writer);
         return true;
         }
