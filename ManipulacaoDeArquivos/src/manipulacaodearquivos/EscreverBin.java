@@ -11,14 +11,12 @@ import java.io.Serializable;
  *
  * @author joao.piccoli
  */
-public class EscreverBin implements Serializable{
-    
-    public String bin;
-    
-    
-    public EscreverBin(String bin)
-    {
+public class EscreverBin implements Serializable {
+
+    public int bin;
+
+    public EscreverBin(int bin) {
         this.bin = bin;
     }
-    
+
 }

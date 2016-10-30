@@ -12,13 +12,12 @@ import java.io.Serializable;
  * @author joao.piccoli
  */
 public class EscreverListaArvore implements Serializable {
-    
-   public String silaba;
-   public int frequencia;
-    
-    public EscreverListaArvore(String silaba, int frequencia)
-    {
+
+    public String silaba;
+    public int frequencia;
+
+    public EscreverListaArvore(String silaba, int frequencia) {
         this.silaba = silaba;
-        this.frequencia = frequencia;    
-    } 
+        this.frequencia = frequencia;
+    }
 }

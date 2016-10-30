@@ -275,7 +275,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             FileOutputStream fos = new FileOutputStream("C:\\Users\\"+nomeUsuario+"\\Documents\\Árvore.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             EscreverListaArvore[] sfGuardar = new EscreverListaArvore[pegarSf.length];
-            EscreverBin bin = new EscreverBin(encode);
+            int tamanho = encode.toCharArray().length;
+            EscreverBin bin = new EscreverBin(tamanho);
             int k = 0;
               for(SilabaFreq v : pegarSf)
                {
@@ -343,7 +344,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                   ObjectInputStream ois = new ObjectInputStream(fis);
                   recuperarValor = (EscreverListaArvore[]) ois.readObject();
                   binRecuperar = (EscreverBin) ois.readObject();
-                  c.tamanhoComparar = binRecuperar.bin.toString().length();
+                  c.tamanhoComparar = binRecuperar.bin;
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -357,7 +358,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
           c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
         }
         
-       
         Ler descompactar = new Ler();
         try {
             descompactar.LeituraUTF8(arquivo);
