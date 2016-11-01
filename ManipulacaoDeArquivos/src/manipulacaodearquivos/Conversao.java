@@ -6,6 +6,11 @@
 package manipulacaodearquivos;
 
 import Interface.TelaPrincipal;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,30 +121,69 @@ public class Conversao
         char[] aux;
         int[] novoValor;
         char[] verificador;
+        int compararUltima = -1;
         ArrayList<Character> comparar = new ArrayList<>();
         
-        for(String j : valor)
+        if(valor.size()>1)
         {
-          descompactadoInt = j;
-          aux = descompactadoInt.toCharArray();
-          novoValor = new int[aux.length];
-          for(k = 0; k < aux.length; k++)
-          {
+            for(String j : valor)
+            {
+             compararUltima++;
+             descompactadoInt = j;
+             aux = descompactadoInt.toCharArray();
+             novoValor = new int[aux.length];
+              for(k = 0; k < aux.length; k++)
+              {  
+              novoValor[k] = (int)aux[k];
+              //if(k != aux.length - 1)
+              if(compararUltima != valor.size()-1)
+              bin += TransformarDecEmBinario(novoValor[k], true, false);
+              else if(compararUltima == valor.size()-1 && k == aux.length-1)
+              bin += TransformarDecEmBinario(novoValor[k], false, verificar);             
+              }  
+            }
+            
+            while(bin.toCharArray().length != tamanhoComparar)
+           {
+            diferenca = tamanhoComparar - bin.toCharArray().length;   
+            return TransformarSimbEmBin(reajuste, true);
+           }
+           
+           /*File teste = new File("C:\\Users\\joao.piccoli\\Desktop\\Teste.txt");
+           FileWriter fw = new FileWriter(teste);
+           
+           BufferedWriter bw = new BufferedWriter(fw);
+           
+           bw.write(bin);
+           bw.close();*/
+           
+           
+           return bin;
+        }
+        else
+        {
+          for(String j : valor)
+            {
+             compararUltima++;
+             descompactadoInt = j;
+             aux = descompactadoInt.toCharArray();
+             novoValor = new int[aux.length];
+              for(k = 0; k < aux.length; k++)
+              {  
               novoValor[k] = (int)aux[k];
               if(k != aux.length - 1)
               bin += TransformarDecEmBinario(novoValor[k], true, false);
               else
               bin += TransformarDecEmBinario(novoValor[k], false, verificar);             
-          }  
-        } 
-     
-        while(bin.toCharArray().length != tamanhoComparar)
-        {
-          diferenca = tamanhoComparar - bin.toCharArray().length;   
-          return TransformarSimbEmBin(reajuste, true);
+              }  
+            }
+          while(bin.toCharArray().length != tamanhoComparar)
+           {
+            diferenca = tamanhoComparar - bin.toCharArray().length;   
+            return TransformarSimbEmBin(reajuste, true);
+           }
+           return bin;
         }
-          
-        return bin;
         
         //SOLUÇÃO PROVISÓRIA
         //String retornar = "";
@@ -178,7 +222,7 @@ public class Conversao
         {
             int adicionar = diferenca;
             for(int j = 0; j<adicionar; j++)
-             valores.add(0); 
+            valores.add(0); 
         }
         
 
