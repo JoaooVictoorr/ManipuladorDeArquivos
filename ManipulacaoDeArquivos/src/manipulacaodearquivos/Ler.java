@@ -8,11 +8,13 @@ package manipulacaodearquivos;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +55,22 @@ public class Ler {
         
         return retorno.toString();
     }
+      
+      public int LeituraContarCaracteres(File arquivo) throws UnsupportedEncodingException, FileNotFoundException, IOException
+      {
+          int contagem = 0;
+          
+         InputStreamReader reader = new InputStreamReader(new FileInputStream(arquivo),"Windows-1252");
+          BufferedReader ler = new BufferedReader(reader);
+          String linha = ler.readLine();
+          
+        while (linha != null) {
+            contagem += linha.toCharArray().length;
+            System.out.println(linha);
+            linha = ler.readLine();
+        }
+        
+        return contagem;
+      }
 
 }

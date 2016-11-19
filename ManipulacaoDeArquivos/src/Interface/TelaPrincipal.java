@@ -42,6 +42,7 @@ import manipulacaodearquivos.EscreverBin;
 import manipulacaodearquivos.EscreverListaArvore;
 import manipulacaodearquivos.Ler;
 import manipulacaodearquivos.ManipulacaoDeArquivos;
+import manipulacaodearquivos.RegrasHifenizacao;
 import manipulacaodearquivos.SeparacaoDeSilabas;
 import manipulacaodearquivos.SeparadorDePalavras;
 import manipulacaodearquivos.SilabaFreq;
@@ -202,6 +203,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         SeparadorDePalavras separar = new SeparadorDePalavras();
         SeparacaoDeSilabas separacaoDeSilabas = new SeparacaoDeSilabas();
         SilabasSeparadasPorLinha silabas = new  SilabasSeparadasPorLinha();
+        RegrasHifenizacao rh = new RegrasHifenizacao();
         Ler ler = new Ler();
         String[] test;
         File arquivoLeitura = null;
@@ -228,7 +230,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
           }
         try {
             //escrever.Escrever(arquivo);
-            //ler.Leitura(arquivo);
+            rh.valorCompressao = ler.LeituraContarCaracteres(arquivo);
             separacaoDeSilabas.separadorFile = separar.Separar(arquivo);
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -275,8 +277,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             FileOutputStream fos = new FileOutputStream("C:\\Users\\"+nomeUsuario+"\\Documents\\Árvore.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             EscreverListaArvore[] sfGuardar = new EscreverListaArvore[pegarSf.length];
-            int tamanho = encode.toCharArray().length;
-            EscreverBin bin = new EscreverBin(tamanho);
+            //int tamanho = encode.toCharArray().length;
+            EscreverBin bin = new EscreverBin(encode);
             int k = 0;
               for(SilabaFreq v : pegarSf)
                {
@@ -335,8 +337,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.showSaveDialog(this);
         String caminhoDescompactacao = chooser.getSelectedFile().getAbsolutePath();
-        
-        if(pegar == null)
+        String encode = null;
+        //if(pegar == null)
         { 
             try {
                   String nomeUsuario = System.getProperty("user.name");
@@ -344,7 +346,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                   ObjectInputStream ois = new ObjectInputStream(fis);
                   recuperarValor = (EscreverListaArvore[]) ois.readObject();
                   binRecuperar = (EscreverBin) ois.readObject();
-                  c.tamanhoComparar = binRecuperar.bin;
+                  encode = binRecuperar.bin;//c.tamanhoComparar = binRecuperar.bin;
+                  
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -353,10 +356,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
-        {
-          c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
-        }
+        //else
+        //{
+         // c.tamanhoComparar = c.PuxarValor(pegar.toCharArray());
+        //}
         
         Ler descompactar = new Ler();
         try {
@@ -365,23 +368,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        String encode = c.TransformarSimbEmBin(descompactar.retorno,false);
+        //String encodeSemFechar = c.TransformarSimbEmBin(descompactar.retorno,false);
         
-       if(pegarSf != null)
-       {
-        HuffmanTree tree = buildTree(pegarSf);
+       //if(pegarSf != null)
+       //{
+        //HuffmanTree tree = buildTree(pegarSf);
           // Decodificar o texto
-        System.out.println("\n\nTEXTO DECODIFICADO");
-        System.out.println(decode(tree,encode));
-        String descompactado = decode(tree,encode);
-        try {
-            escrever.EscreverString(descompactado, caminhoDescompactacao +"\\TextoDescompactado.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       }
-       else
-       { 
+        //System.out.println("\n\nTEXTO DECODIFICADO");
+        //System.out.println(decode(tree,encodeSemFechar));
+        //String descompactado = decode(tree,encodeSemFechar);
+        //try {
+         //   escrever.EscreverString(descompactado, caminhoDescompactacao +"\\TextoDescompactado.txt");
+        //} catch (IOException ex) {
+          //  Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+       // }
+      // }
+      // else
+      // { 
            int k = 0;
            int tamanho = 0;
         
@@ -407,7 +410,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-       }
+       //}
       
       
     }//GEN-LAST:event_btnDescomprimirActionPerformed

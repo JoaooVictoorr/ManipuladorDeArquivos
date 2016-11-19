@@ -13,9 +13,9 @@ import java.io.Serializable;
  */
 public class EscreverBin implements Serializable {
 
-    public int bin;
+    public String bin;
 
-    public EscreverBin(int bin) {
+    public EscreverBin(String bin) {
         this.bin = bin;
     }
 
