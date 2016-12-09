@@ -42,8 +42,14 @@ public class RegrasHifenizacao extends SeparacaoDeSilabas {
         // REGRAS COMEÇAM A PARTIR DAQUI
                for( j = 0; j<tp.transferencia.length; j++)
             {  
+           if(tp.transferencia[j] == ' ')
+           {
+               escrever.append('-');
+               escrever.append(tp.transferencia[j]);
+               escrever.append('-');
+           }
                
-               if(vv.VerificarVogal(tp.transferencia[j]))
+           else if(vv.VerificarVogal(tp.transferencia[j]))
                {
                    if(j == 0 && j == fim)
                  escrever.append(tp.transferencia[j]);
